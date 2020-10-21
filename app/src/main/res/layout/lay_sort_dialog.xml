@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomSort_SortDialog"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/textSortTitle_SortDialog"
@@ -40,8 +39,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/padding_medium"
-        android:layout_marginTop="@dimen/padding_medium"
+        android:layout_marginTop="@dimen/padding_small"
         android:layout_marginEnd="@dimen/padding_medium"
+        android:layout_marginBottom="@dimen/padding_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view">
@@ -50,37 +50,49 @@
             android:id="@+id/rbTotalSales_SortDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@drawable/dr_ckeck_sort"
+            android:button="@drawable/dr_check_sort"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:padding="@dimen/padding_small"
             android:text="Total sales"
             android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/text_medium_color" />
 
         <RadioButton
             android:id="@+id/rbAddToCart_SortDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@drawable/dr_ckeck_sort"
+            android:button="@drawable/dr_check_sort"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:padding="@dimen/padding_small"
             android:text="Add to cart"
             android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/text_medium_color" />
 
         <RadioButton
             android:id="@+id/rbDownload_SortDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@drawable/dr_ckeck_sort"
+            android:button="@drawable/dr_check_sort"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:padding="@dimen/padding_small"
             android:text="downloads"
             android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/text_medium_color" />
 
         <RadioButton
             android:id="@+id/rbUserSessions_SortDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@drawable/dr_ckeck_sort"
+            android:button="@drawable/dr_check_sort"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:padding="@dimen/padding_small"
             android:text="User sessions"
             android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/text_medium_color" />
 
     </RadioGroup>
 

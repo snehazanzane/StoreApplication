@@ -10,6 +10,7 @@ import com.assignment.assignmentapplication.R
 import com.assignment.assignmentapplication.databinding.adapters.AppsAdapter
 import com.assignment.assignmentapplication.databinding.models.AppsListModel
 import com.assignment.assignmentapplication.databinding.models.AppsMainModel
+import com.assignment.assignmentapplication.interfacecallbacks.SortOptionSelectionInterface
 import com.assignment.assignmentapplication.ui.fragment.SortByBottomSheetFragment
 import com.assignment.assignmentinnofiedsolutionpvtltd.network.AppsStoreAPI
 import com.assignment.assignmentinnofiedsolutionpvtltd.utilFiles.NetworkConnectivity
@@ -20,11 +21,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LeaderBoardActivity : AppCompatActivity(), View.OnClickListener {
+class LeaderBoardActivity : AppCompatActivity(), View.OnClickListener,
+    SortOptionSelectionInterface {
     var arrApps: ArrayList<AppsMainModel> = ArrayList()
     lateinit var adapterApps: AppsAdapter
 
-    lateinit var dialogSort: BottomSheetDialog
+    var sortByType: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,58 +35,7 @@ class LeaderBoardActivity : AppCompatActivity(), View.OnClickListener {
         //** Set the data for our ArrayList
         getItemsData()
 
-        setSortBottomSheetDialog()
-
-        buttonSort_Toolbar.setOnClickListener(View.OnClickListener {
-            SortByBottomSheetFragment().apply {
-                show(supportFragmentManager, SortByBottomSheetFragment.TAG)
-            }
-        })
-    }
-
-    private fun setSortBottomSheetDialog() {
-
-
-        /*val laySortdialog = layoutInflater.inflate(R.layout.lay_sort_dialog, null)
-        dialogSort = BottomSheetDialog(this)
-        dialogSort.setContentView(laySortdialog)
-        laySortdialog.setOnClickListener {
-            dialogSort.dismiss()
-        }
-*/
-
-
-      //  buttonSort_Toolbar.setOnClickListener(View.OnClickListener { dialogSort.show() })
-
-
-        /* bottomSheetBehavior = BottomSheetBehavior.from(bottomSort_SortDialog)
-
-         bottomSheetBehavior.addBottomSheetCallback(object :
-             BottomSheetBehavior.BottomSheetCallback() {
-
-             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                 // handle onSlide
-             }
-
-             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                 when (newState) {
-                     BottomSheetBehavior.STATE_COLLAPSED -> Toast.makeText(this@LeaderBoardActivity, "STATE_COLLAPSED", Toast.LENGTH_SHORT).show()
-                     BottomSheetBehavior.STATE_EXPANDED -> Toast.makeText(this@LeaderBoardActivity, "STATE_EXPANDED", Toast.LENGTH_SHORT).show()
-                     BottomSheetBehavior.STATE_DRAGGING -> Toast.makeText(this@LeaderBoardActivity, "STATE_DRAGGING", Toast.LENGTH_SHORT).show()
-                     BottomSheetBehavior.STATE_SETTLING -> Toast.makeText(this@LeaderBoardActivity, "STATE_SETTLING", Toast.LENGTH_SHORT).show()
-                     BottomSheetBehavior.STATE_HIDDEN -> Toast.makeText(this@LeaderBoardActivity, "STATE_HIDDEN", Toast.LENGTH_SHORT).show()
-                     else -> Toast.makeText(this@LeaderBoardActivity, "OTHER_STATE", Toast.LENGTH_SHORT).show()
-                 }
-             }
-         })
-
-         buttonSort_Toolbar.setOnClickListener {
-             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
-                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-             else
-                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-         }*/
-
+        buttonSort_Toolbar.setOnClickListener(this)
     }
 
 
@@ -144,28 +95,58 @@ class LeaderBoardActivity : AppCompatActivity(), View.OnClickListener {
      * Binding apps data to Adapter
      */
     fun setAdapter() {
+
+        when (sortByType) {
+            1 -> {
+                var sortedList = arrApps.sortedWith(compareBy({ it.data.total_sale.total }))
+                arrApps.clear()
+                arrApps.addAll(sortedList)
+            }
+            2 -> {
+                var sortedList = arrApps.sortedWith(compareBy({ it.data.add_to_cart.total }))
+                arrApps.clear()
+                arrApps.addAll(sortedList)
+            }
+            3 -> {
+                var sortedList = arrApps.sortedWith(compareBy({ it.data.downloads.total }))
+                arrApps.clear()
+                arrApps.addAll(sortedList)
+            }
+            4 -> {
+                var sortedList = arrApps.sortedWith(compareBy({ it.data.sessions.total }))
+                arrApps.clear()
+                arrApps.addAll(sortedList)
+            }
+        }
+
+
         adapterApps = AppsAdapter(this@LeaderBoardActivity, arrApps)
         adapterApps.notifyDataSetChanged()
         recyclerView_LeaderBoardActivity.adapter = adapterApps
         setRVLayoutManager()
     }
 
-
     fun setRVLayoutManager() {
         val mLayoutManager = LinearLayoutManager(this)
-        /* mLayoutManager.reverseLayout = true
-         mLayoutManager.stackFromEnd = true*/
         recyclerView_LeaderBoardActivity.layoutManager = mLayoutManager
         recyclerView_LeaderBoardActivity.setHasFixedSize(true)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            //  R.id.buttonSort_Toolbar ->
-            // dialogSort?.show()
-            // Toast.makeText(this, "Sort is clicked", Toast.LENGTH_SHORT).show()
+            R.id.buttonSort_Toolbar -> {
+                SortByBottomSheetFragment(sortByType, this@LeaderBoardActivity).apply {
+                    show(supportFragmentManager, SortByBottomSheetFragment.TAG)
+                }
+            }
+
 
         }
+    }
+
+    override fun sortByOptionSelection(type: Int) {
+        sortByType = type
+        setAdapter()
     }
 
 

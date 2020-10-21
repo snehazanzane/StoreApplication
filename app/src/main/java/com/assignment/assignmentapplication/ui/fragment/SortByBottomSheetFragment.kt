@@ -7,15 +7,15 @@ import android.view.ViewGroup
 import android.widget.RadioGroup
 import android.widget.Toast
 import com.assignment.assignmentapplication.R
+import com.assignment.assignmentapplication.interfacecallbacks.SortOptionSelectionInterface
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.lay_sort_dialog.*
 
-class SortByBottomSheetFragment : BottomSheetDialogFragment() {
+class SortByBottomSheetFragment(var type: Int, var callback: SortOptionSelectionInterface) :
+    BottomSheetDialogFragment() {
 
     companion object {
-
-        const val TAG = "CustomBottomSheetDialogFragment"
-
+        const val TAG = "SortByBottomSheetFragment"
     }
 
     override fun onCreateView(
@@ -29,34 +29,36 @@ class SortByBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        when (type) {
+            1 -> rbTotalSales_SortDialog.isChecked = true
+            2 -> rbAddToCart_SortDialog.isChecked = true
+            3 -> rbDownload_SortDialog.isChecked = true
+            4 -> rbUserSessions_SortDialog.isChecked = true
+        }
+
         rdg_SortDialog.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.rbTotalSales_SortDialog -> {
-                    Toast.makeText(activity, "Sales selected", Toast.LENGTH_SHORT).show()
+                    callback.sortByOptionSelection(1)
                     dialog?.dismiss()
                 }
-                R.id.rbAddToCart_SortDialog ->
-                    Toast.makeText(activity, "Add to cart selected", Toast.LENGTH_SHORT).show()
-                R.id.rbDownload_SortDialog ->
-                    Toast.makeText(activity, "Download selected", Toast.LENGTH_SHORT).show()
-                R.id.rbUserSessions_SortDialog ->
-                    Toast.makeText(activity, "User sessions selected", Toast.LENGTH_SHORT).show()
+                R.id.rbAddToCart_SortDialog -> {
+                    callback.sortByOptionSelection(2)
+                    dialog?.dismiss()
+                }
+                R.id.rbDownload_SortDialog -> {
+                    callback.sortByOptionSelection(3)
+                    dialog?.dismiss()
+                }
+                R.id.rbUserSessions_SortDialog -> {
+                    callback.sortByOptionSelection(4)
+                    dialog?.dismiss()
+                }
+                else -> {
+                    callback.sortByOptionSelection(0)
+                    dialog?.dismiss()
+                }
             }
-
         })
-
-        /*firstButton.setOnClickListener {
-            //handle click event
-            Toast.makeText(context, "First Button Clicked", Toast.LENGTH_SHORT).show()
-        }
-        secondButton.setOnClickListener {
-            //handle click event
-            Toast.makeText(context, "Second Button Clicked", Toast.LENGTH_SHORT).show()
-        }
-        thirdButton.setOnClickListener {
-            //handle click event
-            Toast.makeText(context, "Third Button Clicked", Toast.LENGTH_SHORT).show()
-        }*/
-
     }
 }
