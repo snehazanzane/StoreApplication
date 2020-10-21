@@ -16,7 +16,6 @@ import com.assignment.assignmentapplication.ui.fragment.AppsDetailsBottomSheetFr
 import com.assignment.assignmentapplication.ui.fragment.SortByBottomSheetFragment
 import com.assignment.assignmentinnofiedsolutionpvtltd.network.AppsStoreAPI
 import com.assignment.assignmentinnofiedsolutionpvtltd.utilFiles.NetworkConnectivity
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_leaderboard.*
 import kotlinx.android.synthetic.main.toolbar.*
 import retrofit2.Call
@@ -37,22 +36,19 @@ class LeaderBoardActivity : AppCompatActivity(), View.OnClickListener,
         //** Set the data for our ArrayList
         getItemsData()
 
+        //Setting onclick actions
         buttonSort_Toolbar.setOnClickListener(this)
     }
-
 
     /**
      * Get Apps List Data from Rest API
      */
     private fun getItemsData() {
-
         if (NetworkConnectivity.isConnected(this@LeaderBoardActivity)) {
-
             //Get data from Rest API Call -->>
             val progressDialog = ProgressDialog(this@LeaderBoardActivity)
             progressDialog.setTitle("Please wait...")
             progressDialog.show()
-
             AppsStoreAPI().getApps()
                 .enqueue(object : Callback<AppsListModel> {
                     override fun onFailure(call: Call<AppsListModel>, t: Throwable) {
@@ -69,12 +65,9 @@ class LeaderBoardActivity : AppCompatActivity(), View.OnClickListener,
                         response: Response<AppsListModel>
                     ) {
                         response.body()?.let {
-
                             progressDialog.dismiss()
                             if (it.apps.size > 0) {
-
                                 arrApps = it.apps
-
                                 //** Set the adapter of the RecyclerView
                                 setAdapter()
                             } else {
@@ -84,7 +77,6 @@ class LeaderBoardActivity : AppCompatActivity(), View.OnClickListener,
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
-
                         }
                     }
                 })
@@ -98,6 +90,7 @@ class LeaderBoardActivity : AppCompatActivity(), View.OnClickListener,
      */
     fun setAdapter() {
 
+        //Sorting data ac according to option selection
         when (sortByType) {
             1 -> {
                 var sortedList = arrApps.sortedWith(compareBy({ it.data.total_sale.total }))
@@ -120,8 +113,6 @@ class LeaderBoardActivity : AppCompatActivity(), View.OnClickListener,
                 arrApps.addAll(sortedList)
             }
         }
-
-
         adapterApps = AppsAdapter(this@LeaderBoardActivity, arrApps,this@LeaderBoardActivity)
         adapterApps.notifyDataSetChanged()
         recyclerView_LeaderBoardActivity.adapter = adapterApps
@@ -141,21 +132,23 @@ class LeaderBoardActivity : AppCompatActivity(), View.OnClickListener,
                     show(supportFragmentManager, SortByBottomSheetFragment.TAG)
                 }
             }
-
-
         }
     }
 
+    /**
+     * list sort according to sales,carts, downloads,sessions
+     */
     override fun sortByOptionSelection(type: Int) {
         sortByType = type
         setAdapter()
     }
 
+    /**
+     * on list item details click a action
+     */
     override fun onAppDetails(obj: AppsMainModel) {
         AppsDetailsBottomSheetFragment(obj).apply {
             show(supportFragmentManager, SortByBottomSheetFragment.TAG)
         }
     }
-
-
 }

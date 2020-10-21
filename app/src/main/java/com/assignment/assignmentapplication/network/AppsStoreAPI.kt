@@ -17,6 +17,7 @@ interface AppsStoreAPI {
     companion object {
         operator fun invoke(): AppsStoreAPI {
 
+            //For timeout functionality
             val okHttpClient: OkHttpClient = OkHttpClient.Builder()
                 .connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
