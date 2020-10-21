@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:theme="@style/Theme.MaterialComponents.Light"
     android:layout_margin="@dimen/padding_small"
     app:cardCornerRadius="@dimen/card_border_radius">
 
@@ -60,7 +61,7 @@
             android:gravity="center"
             android:padding="@dimen/padding_medium"
             android:text="@string/str_button_view_details"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/text_light_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

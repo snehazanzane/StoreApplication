@@ -4,4 +4,10 @@
     <string name="str_tlt_leaderboard_activity">Leaderboard</string>
     <string name="str_tlt_total_sales">Total Sales</string>
     <string name="str_button_view_details">View Details</string>
+    <string name="str_GDP">GDP</string>
+
+    <string name="No_internet_connection">No Internet connection!! Please check.</string>
+    <string name="str_OK">OK</string>
+    <string name="msg_unable_to_fetch_data">Sorry unable to fetch data.</string>
+    <string name="msg_no_data_available">Data not available.</string>
 </resources>

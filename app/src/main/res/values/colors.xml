@@ -10,4 +10,5 @@
     <color name="text_dark_color">#2E2E2E</color>
     <color name="text_medium_color">#717A81</color>
     <color name="text_light_color">#B4C0CA</color>
+    <color name="blue">#03A9F4</color>
 </resources>
