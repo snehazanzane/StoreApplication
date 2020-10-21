@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Assignment</string>
+    <string name="str_button_sort_by">SORT BY</string>
+    <string name="str_tlt_leaderboard_activity">Leaderboard</string>
+    <string name="str_tlt_total_sales">Total Sales</string>
+    <string name="str_button_view_details">View Details</string>
 </resources>
