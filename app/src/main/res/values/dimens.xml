@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_border_width">1dp</dimen>
+    <dimen name="card_border_radius">5dp</dimen>
+
+    <dimen name="actionbar_button_image_size">16dp</dimen>
+    <dimen name="sort_button_text_size">16sp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="chart_size">200dp</dimen>
+</resources>

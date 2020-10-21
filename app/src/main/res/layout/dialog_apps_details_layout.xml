@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textAppName_AppDetailsDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_medium"
+        android:layout_marginTop="@dimen/padding_medium"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="App Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/text_dark_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textValueTitle_AppDetailsDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/padding_medium"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="App name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/text_light_color"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textAppName_AppDetailsDialog"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textValue_AppDetailsDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_small"
+        android:layout_marginEnd="@dimen/padding_medium"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="value"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/text_dark_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textValueTitle_AppDetailsDialog" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart_AppDetailsDialog"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/chart_size"
+        android:layout_marginTop="@dimen/padding_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textValue_AppDetailsDialog" />
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView_AppDetailsDialog"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/padding_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lineChart_AppDetailsDialog"
+        app:itemBackground="@android:color/white"
+        app:itemIconSize="24dp"
+        app:labelVisibilityMode="unlabeled"
+        app:elevation="2dp"
+        app:itemIconTint="@drawable/dr_tab_selector"
+        app:itemTextColor="@drawable/dr_tab_selector"
+        app:menu="@menu/menu_details_bottom_navigation"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
