@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
-import android.widget.Toast
 import com.assignment.assignmentapplication.R
 import com.assignment.assignmentapplication.interfacecallbacks.SortOptionSelectionInterface
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.lay_sort_dialog.*
+import kotlinx.android.synthetic.main.dialog_sort_bottom_layout.*
 
 class SortByBottomSheetFragment(var type: Int, var callback: SortOptionSelectionInterface) :
     BottomSheetDialogFragment() {
@@ -23,7 +22,7 @@ class SortByBottomSheetFragment(var type: Int, var callback: SortOptionSelection
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.lay_sort_dialog, container, false)
+        return inflater.inflate(R.layout.dialog_sort_bottom_layout, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

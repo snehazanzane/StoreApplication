@@ -8,9 +8,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.assignment.assignmentapplication.R
 import com.assignment.assignmentapplication.databinding.models.AppsMainModel
+import com.assignment.assignmentapplication.interfacecallbacks.AppsItemSelectionInterface
 import kotlinx.android.synthetic.main.view_store_list_item.view.*
 
-class AppsAdapter(var context: Context, private var arrApps: ArrayList<AppsMainModel>) :
+class AppsAdapter(var context: Context, private var arrApps: ArrayList<AppsMainModel>,var callback:AppsItemSelectionInterface) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -36,7 +37,7 @@ class AppsAdapter(var context: Context, private var arrApps: ArrayList<AppsMainM
 
 
         itemViewHolder.itemView.textViewDetails_StoreListItem.setOnClickListener(View.OnClickListener {
-            Toast.makeText(context,"View details clicked : "+arrApps.get(position)?.name,Toast.LENGTH_SHORT).show()
+            callback.onAppDetails(arrApps.get(position))
         })
     }
 }

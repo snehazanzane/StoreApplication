@@ -10,7 +10,9 @@ import com.assignment.assignmentapplication.R
 import com.assignment.assignmentapplication.databinding.adapters.AppsAdapter
 import com.assignment.assignmentapplication.databinding.models.AppsListModel
 import com.assignment.assignmentapplication.databinding.models.AppsMainModel
+import com.assignment.assignmentapplication.interfacecallbacks.AppsItemSelectionInterface
 import com.assignment.assignmentapplication.interfacecallbacks.SortOptionSelectionInterface
+import com.assignment.assignmentapplication.ui.fragment.AppsDetailsBottomSheetFragment
 import com.assignment.assignmentapplication.ui.fragment.SortByBottomSheetFragment
 import com.assignment.assignmentinnofiedsolutionpvtltd.network.AppsStoreAPI
 import com.assignment.assignmentinnofiedsolutionpvtltd.utilFiles.NetworkConnectivity
@@ -22,7 +24,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LeaderBoardActivity : AppCompatActivity(), View.OnClickListener,
-    SortOptionSelectionInterface {
+    SortOptionSelectionInterface,AppsItemSelectionInterface {
     var arrApps: ArrayList<AppsMainModel> = ArrayList()
     lateinit var adapterApps: AppsAdapter
 
@@ -120,7 +122,7 @@ class LeaderBoardActivity : AppCompatActivity(), View.OnClickListener,
         }
 
 
-        adapterApps = AppsAdapter(this@LeaderBoardActivity, arrApps)
+        adapterApps = AppsAdapter(this@LeaderBoardActivity, arrApps,this@LeaderBoardActivity)
         adapterApps.notifyDataSetChanged()
         recyclerView_LeaderBoardActivity.adapter = adapterApps
         setRVLayoutManager()
@@ -147,6 +149,12 @@ class LeaderBoardActivity : AppCompatActivity(), View.OnClickListener,
     override fun sortByOptionSelection(type: Int) {
         sortByType = type
         setAdapter()
+    }
+
+    override fun onAppDetails(obj: AppsMainModel) {
+        AppsDetailsBottomSheetFragment(obj).apply {
+            show(supportFragmentManager, SortByBottomSheetFragment.TAG)
+        }
     }
 
 

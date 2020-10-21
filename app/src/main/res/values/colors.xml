@@ -11,4 +11,10 @@
     <color name="text_medium_color">#717A81</color>
     <color name="text_light_color">#B4C0CA</color>
     <color name="blue">#03A9F4</color>
+    
+    <color name="graph_start_color">#57ACEF</color>
+    <color name="graph_end_color">#ADCAE1</color>
+
+    <color name="gray">#7A7C7E</color>
+    <color name="red">#E91E63</color>
 </resources>

@@ -46,4 +46,6 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_latest_version"
     implementation "com.squareup.okhttp3:okhttp:4.7.2"
 
+    //For line graph
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

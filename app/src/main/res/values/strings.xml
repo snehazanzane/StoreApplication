@@ -10,4 +10,7 @@
     <string name="str_OK">OK</string>
     <string name="msg_unable_to_fetch_data">Sorry unable to fetch data.</string>
     <string name="msg_no_data_available">Data not available.</string>
+    <string name="str_tlt_add_to_cart">Add to Cart</string>
+    <string name="str_tlt_download">Downloads</string>
+    <string name="str_tlt_user_sessions">User Sessions</string>
 </resources>
