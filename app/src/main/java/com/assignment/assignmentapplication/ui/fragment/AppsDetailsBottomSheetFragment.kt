@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.assignment.assignmentapplication.R
 import com.assignment.assignmentapplication.databinding.models.AppsMainModel
+import com.assignment.assignmentapplication.utilFiles.AppUtil
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
@@ -45,7 +46,8 @@ class AppsDetailsBottomSheetFragment(var obj: AppsMainModel) :
         textAppName_AppDetailsDialog.text = obj?.name
 
         textValueTitle_AppDetailsDialog.text = activity?.getString(R.string.str_tlt_total_sales)
-        textValue_AppDetailsDialog.text = obj?.data?.total_sale?.total.toString()
+        textValue_AppDetailsDialog.text =
+            AppUtil.convertNumberFormatted(obj?.data?.total_sale?.total)
         setGraph(1)
 
         bottomNavigationView_AppDetailsDialog.setOnNavigationItemSelectedListener {
@@ -53,28 +55,32 @@ class AppsDetailsBottomSheetFragment(var obj: AppsMainModel) :
                 R.id.menu_home -> {
                     textValueTitle_AppDetailsDialog.text =
                         activity?.getString(R.string.str_tlt_total_sales)
-                    textValue_AppDetailsDialog.text = obj?.data?.total_sale?.total.toString()
+                    textValue_AppDetailsDialog.text =
+                        AppUtil.convertNumberFormatted(obj?.data?.total_sale?.total)
                     setGraph(1)
                     true
                 }
                 R.id.menu_notification -> {
                     textValueTitle_AppDetailsDialog.text =
                         activity?.getString(R.string.str_tlt_add_to_cart)
-                    textValue_AppDetailsDialog.text = obj?.data?.add_to_cart?.total.toString()
+                    textValue_AppDetailsDialog.text =
+                        AppUtil.convertNumberFormatted(obj?.data?.add_to_cart?.total)
                     setGraph(2)
                     true
                 }
                 R.id.menu_search -> {
                     textValueTitle_AppDetailsDialog.text =
                         activity?.getString(R.string.str_tlt_download)
-                    textValue_AppDetailsDialog.text = obj?.data?.downloads?.total.toString()
+                    textValue_AppDetailsDialog.text =
+                        AppUtil.convertNumberFormatted(obj?.data?.downloads?.total)
                     setGraph(3)
                     true
                 }
                 R.id.menu_profile -> {
                     textValueTitle_AppDetailsDialog.text =
                         activity?.getString(R.string.str_tlt_user_sessions)
-                    textValue_AppDetailsDialog.text = obj?.data?.sessions?.total.toString()
+                    textValue_AppDetailsDialog.text =
+                        AppUtil.convertNumberFormatted(obj?.data?.sessions?.total)
                     setGraph(4)
                     true
                 }
