@@ -1,6 +1,5 @@
 package com.assignment.assignmentapplication.ui.fragment
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,12 +15,9 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_apps_details_layout.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -45,11 +41,13 @@ class AppsDetailsBottomSheetFragment(var obj: AppsMainModel) :
 
         textAppName_AppDetailsDialog.text = obj?.name
 
+        //Setting default selection of tab
         textValueTitle_AppDetailsDialog.text = activity?.getString(R.string.str_tlt_total_sales)
         textValue_AppDetailsDialog.text =
             AppUtil.convertNumberFormatted(obj?.data?.total_sale?.total)
         setGraph(1)
 
+        //Tab option selection handel with the help of menu id
         bottomNavigationView_AppDetailsDialog.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_home -> {
@@ -93,12 +91,17 @@ class AppsDetailsBottomSheetFragment(var obj: AppsMainModel) :
         var lineDataSet = LineDataSet(getSalesData(), "Apps")
 
         when (type) {
-            1 -> lineDataSet = LineDataSet(getSalesData(), "Total Sales")
-            2 -> lineDataSet = LineDataSet(getAddToCartData(), "Add to Cart")
-            3 -> lineDataSet = LineDataSet(getDownloadData(), "Download")
-            4 -> lineDataSet = LineDataSet(getUserSessions(), "User Sessions")
+            1 -> lineDataSet =
+                LineDataSet(getSalesData(), activity?.getString(R.string.str_tlt_total_sales))
+            2 -> lineDataSet =
+                LineDataSet(getAddToCartData(), activity?.getString(R.string.str_tlt_add_to_cart))
+            3 -> lineDataSet =
+                LineDataSet(getDownloadData(), activity?.getString(R.string.str_tlt_download))
+            4 -> lineDataSet =
+                LineDataSet(getUserSessions(), activity?.getString(R.string.str_tlt_user_sessions))
         }
 
+        //Designing the graph
         lineDataSet.color = activity?.let { ContextCompat.getColor(it, R.color.graph_end_color) }!!
         lineDataSet.valueTextColor = ContextCompat.getColor(activity!!, R.color.graph_start_color)
         lineDataSet.setDrawValues(false)
@@ -110,6 +113,7 @@ class AppsDetailsBottomSheetFragment(var obj: AppsMainModel) :
         val xAxis: XAxis = lineChart_AppDetailsDialog.getXAxis()
         xAxis.position = XAxis.XAxisPosition.BOTTOM
 
+        //Setting horizontal value
         val months = arrayOf("", "Jan", "Feb", "Mar", "Apr", "May", "Jun")
         val formatter: ValueFormatter =
             object : ValueFormatter() {
@@ -137,7 +141,7 @@ class AppsDetailsBottomSheetFragment(var obj: AppsMainModel) :
         val topXAxis = lineChart_AppDetailsDialog.xAxis
         topXAxis.isEnabled = true
 
-
+        //Setting graph data
         val data = LineData(lineDataSet)
         lineChart_AppDetailsDialog.setData(data)
         lineChart_AppDetailsDialog.animateX(1800, Easing.EaseInOutBounce)

@@ -28,6 +28,7 @@ class SortByBottomSheetFragment(var type: Int, var callback: SortOptionSelection
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        //Display the previous selection for the sort
         when (type) {
             1 -> rbTotalSales_SortDialog.isChecked = true
             2 -> rbAddToCart_SortDialog.isChecked = true
@@ -35,6 +36,7 @@ class SortByBottomSheetFragment(var type: Int, var callback: SortOptionSelection
             4 -> rbUserSessions_SortDialog.isChecked = true
         }
 
+        //sort selection checked according to that display the list with help of callback
         rdg_SortDialog.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.rbTotalSales_SortDialog -> {
